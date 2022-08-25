@@ -1,1 +1,5 @@
-<p>Here we have a employee</p>
+<p>Employee name : {{name}}</p>
+<p>Employee surname : {{surname}}</p>
+<p>Employee age : {{age<18 ? "Minor":"Adult"}}</p>
+<p>Employee company : {{company.value}}</p>
+Add company: <input type="text" #company (keyup)="0">
