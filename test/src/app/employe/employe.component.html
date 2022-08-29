@@ -1,5 +1,21 @@
 <p>Employee name : {{name}}</p>
+
 <p>Employee surname : {{surname}}</p>
+
 <p>Employee age : {{age<18 ? "Minor":"Adult"}}</p>
-<p>Employee company : {{company.value}}</p>
-Add company: <input type="text" #company (keyup)="0">
+
+<p>Employee company : {{company}}</p>
+
+<!-- Add company: <input type="text" #company (keyup)="0" [disabled]="propertySquare" > -->
+Add company: <input type="text" [(ngModel)]="company">
+
+<br/>
+<br/>
+{{textRegister}}
+<br/>
+<!-- Al hacer click en un boton por detrase se genera un objeto del tipo evento, con el cual vamos a jugar-->
+Registrado: <input type="radio" value="yes" name="nRegister" id="register" [checked]="propertyLog" (click)="setRegisterUser($event)">
+<br/>
+No Registrado: <input type="radio" value="no" name="nRegister" (click)="setRegisterUser($event)">
+
+{{getLogUsers()}}
