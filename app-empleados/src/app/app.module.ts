@@ -13,13 +13,15 @@ import { ContactoComponentComponent } from './contacto-component/contacto-compon
 import { RouterModule, Routes } from '@angular/router';
 import { empleadosService } from './empleados.service';
 import { ActualizaComponentComponent } from './actualiza-component/actualiza-component.component';
+import { ErrorPersonalizadoComponent } from './error-personalizado/error-personalizado.component';
 
 const appRoutes:Routes = [
   {path: '', component:HomeComponentComponent},
   {path: 'proyectos', component:ProyectosComponentComponent},
   {path: 'quienes', component:QuienesComponentComponent},
   {path: 'contacto', component:ContactoComponentComponent},
-  {path: 'actualiza/:id', component:ActualizaComponentComponent}
+  {path: 'actualiza/:id', component:ActualizaComponentComponent},
+  {path: '**', component:ErrorPersonalizadoComponent}
 ]
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ const appRoutes:Routes = [
     QuienesComponentComponent,
     ContactoComponentComponent,
     ActualizaComponentComponent,
+    ErrorPersonalizadoComponent,
   ],
   imports: [
     BrowserModule,

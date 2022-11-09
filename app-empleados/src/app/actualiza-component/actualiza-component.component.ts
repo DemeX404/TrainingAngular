@@ -11,16 +11,20 @@ import { Empleado } from '../empleado.model';
 })
 export class ActualizaComponentComponent implements OnInit {
 
-  constructor(private router: Router, private miServicio: ServicioEmpleadosService, private empleadosService: empleadosService, private route:ActivatedRoute) { }
+  constructor(private router: Router, private miServicio: ServicioEmpleadosService, private empleadosService: empleadosService, private route: ActivatedRoute) { }
 
   empleados: Array<Empleado> = [];
+  accion: number;
 
   ngOnInit(): void {
+
+    this.accion = parseInt(this.route.snapshot.queryParams['accion'])
+
     this.empleados = this.empleadosService.empleados
 
     this.indice = this.route.snapshot.params['id'];
 
-    let empleado:Empleado = this.empleadosService.encontrarEmpleado(this.indice);
+    let empleado: Empleado = this.empleadosService.encontrarEmpleado(this.indice);
 
     this.cuadroNombre = empleado.nombre;
     this.cuadroApellido = empleado.apellido;
@@ -42,8 +46,15 @@ export class ActualizaComponentComponent implements OnInit {
   indice: number;
 
   actualizaEmpleado() {
-    let miEmpleado = new Empleado(this.cuadroNombre, this.cuadroApellido, this.cuadroCargo, this.cuadroSalario)
-    this.empleadosService.actualizaEmpleado(this.indice, miEmpleado)
-    this.router.navigate([''])
+
+    if (this.accion == 1) {
+      let miEmpleado = new Empleado(this.cuadroNombre, this.cuadroApellido, this.cuadroCargo, this.cuadroSalario)
+      this.empleadosService.actualizaEmpleado(this.indice, miEmpleado)
+      this.router.navigate([''])
+    } else {
+      this.empleadosService.eliminarEmpleado(this.indice)
+      this.router.navigate([''])
+    }
   }
+
 }
