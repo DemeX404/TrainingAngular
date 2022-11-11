@@ -14,24 +14,23 @@ export class HomeComponentComponent implements OnInit {
   constructor(private miServicio:ServicioEmpleadosService, private empleadosService:empleadosService) { }
 
   ngOnInit(): void {
-    this.empleados = this.empleadosService.empleados
+    this.empleadosService.obtenerEmpleados().subscribe(misEmpleados =>{
+      console.log(misEmpleados)
+      this.empleados = Object.values(misEmpleados)
+      this.empleadosService.setEmpleados(this.empleados)
+    })
   }
 
-  empleados: Array<Empleado> = [
-    new Empleado("Juan", "Diaz", "Presidente", 7500),
-    new Empleado("Ana", "Martin", "Directora", 750),
-    new Empleado("Maria", "Fdez", "Jefa de seccion", 7521),
-    new Empleado("Laura", "Lopez", "Administrativo", 2500)
-  ];
+  empleados: Array<Empleado> = [ ];
 
-  cuadroNombre:string="";
+  cuadroNombre:string=""; 
   cuadroApellido:string="";
   cuadroCargo:string="";
   cuadroSalario:number=0;
 
   agregarEmpleado(){
     let miEmpleado = new Empleado(this.cuadroNombre, this.cuadroApellido, this.cuadroCargo, this.cuadroSalario)
-     this.empleados.push(miEmpleado)
+    this.empleadosService.agregarEmpleadoServicio(miEmpleado)
   }
 
 }

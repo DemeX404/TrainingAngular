@@ -14,6 +14,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { empleadosService } from './empleados.service';
 import { ActualizaComponentComponent } from './actualiza-component/actualiza-component.component';
 import { ErrorPersonalizadoComponent } from './error-personalizado/error-personalizado.component';
+import { DataServices } from './data.services';
+import { HttpClientModule} from '@angular/common/http'
 
 const appRoutes:Routes = [
   {path: '', component:HomeComponentComponent},
@@ -38,9 +40,10 @@ const appRoutes:Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
-  providers: [ServicioEmpleadosService, empleadosService],
+  providers: [ServicioEmpleadosService, empleadosService, DataServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
