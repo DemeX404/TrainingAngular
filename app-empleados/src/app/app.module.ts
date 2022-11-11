@@ -15,14 +15,19 @@ import { empleadosService } from './empleados.service';
 import { ActualizaComponentComponent } from './actualiza-component/actualiza-component.component';
 import { ErrorPersonalizadoComponent } from './error-personalizado/error-personalizado.component';
 import { DataServices } from './data.services';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './login/login.component'
+import { LoginService } from './login/login.service';
+import { CookieService } from 'ngx-cookie-service';
+import { LoginGuardian } from './login/login-guardian';
 
 const appRoutes:Routes = [
   {path: '', component:HomeComponentComponent},
   {path: 'proyectos', component:ProyectosComponentComponent},
   {path: 'quienes', component:QuienesComponentComponent},
-  {path: 'contacto', component:ContactoComponentComponent},
+  {path: 'contacto', component:ContactoComponentComponent, canActivate:[LoginGuardian]},
   {path: 'actualiza/:id', component:ActualizaComponentComponent},
+  {path: 'login', component:LoginComponent},
   {path: '**', component:ErrorPersonalizadoComponent}
 ]
 @NgModule({
@@ -36,6 +41,7 @@ const appRoutes:Routes = [
     ContactoComponentComponent,
     ActualizaComponentComponent,
     ErrorPersonalizadoComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,7 @@ const appRoutes:Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  providers: [ServicioEmpleadosService, empleadosService, DataServices],
+  providers: [ServicioEmpleadosService, empleadosService, DataServices, LoginService, CookieService, LoginGuardian],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
